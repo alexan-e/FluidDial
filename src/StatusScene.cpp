@@ -19,7 +19,7 @@ private:
     ovrd_display_t overd_display = FRO;
 
 public:
-    StatusScene() : Scene("Status") {}
+    StatusScene() : Scene("Status",4) {}
 
     void onExit() override {}
 

@@ -18,7 +18,7 @@ private:
     int  _axis    = 2;  // Z is default
 
 public:
-    ProbingScene() : Scene("Probe") {}
+    ProbingScene() : Scene("Probe",4) {}
 
     void onDialButtonPress() { pop_scene(); }
 

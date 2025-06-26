@@ -9,7 +9,7 @@
 // #define UART_ON_PORT_B // Not recommended, see comment in System.h
 
 // Automatically go to Jog Scene when first connected
-// #define AUTO_JOG_SCENE
+ #define AUTO_JOG_SCENE
 
 // Automatically go to Homing Scene when unhomed alarm is present
 // #define AUTO_HOMING_SCENE

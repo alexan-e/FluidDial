@@ -83,7 +83,7 @@ public:
                         dialLegend += axisNumToChar(axis);
                     }
                 }
-                drawButtonLegends("Jog-", "Jog+", dialLegend.c_str());
+                drawButtonLegends("X>0", "Y>0", dialLegend.c_str());
             }
         }
         refreshDisplay();
@@ -347,19 +347,23 @@ public:
 
     void onGreenButtonPress() {
         if (state == Idle) {
-            start_button_jog(false);
+            // start_button_jog(false);
+            std::string cmd = "G1f1000y0";        
+            send_line(cmd.c_str());
         }
     }
     void onGreenButtonRelease() {
-        cancel_jog();
+        // cancel_jog();
     }
     void onRedButtonPress() {
         if (state == Idle) {
-            start_button_jog(true);
+            // start_button_jog(true);
+            std::string cmd = "G1f1000x0";        
+            send_line(cmd.c_str());
         }
     }
     void onRedButtonRelease() {
-        cancel_jog();
+        // cancel_jog();
     }
 
     void onEncoder(int delta) {
