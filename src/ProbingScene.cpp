@@ -47,8 +47,9 @@ public:
             fnc_realtime(Reset);            
             return;
         } else if (state == Idle) {
-            int retract = _travel < 0 ? _retract : -_retract;
-            send_linef("$J=G91F1000%c%d", axisNumToChar(_axis), retract);
+            // int retract = _travel < 0 ? _retract : -_retract;
+            // send_linef("$J=G91F1000%c%d", axisNumToChar(_axis), retract);
+            send_linef("G38.2G91F%d%c%dP%s", _rate, axisNumToChar(_axis), -_travel, e4_to_cstr(-_offset, 2));
             return;
         } else if (state == Hold || state == DoorClosed) {
             fnc_realtime(Reset);
@@ -134,7 +135,7 @@ public:
             //led.draw(myProbeSwitch);
 
             grnLabel = "Probe";
-            redLabel = "Retract";
+            redLabel = "R.Probe";
         } else {
             if (state == Jog || state == Alarm) {  // there is no Probing state, so Cycle is a valid state on this
                 //centered_text("Invalid State", 105, WHITE, MEDIUM);

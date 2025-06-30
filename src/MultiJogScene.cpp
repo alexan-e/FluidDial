@@ -348,7 +348,9 @@ public:
     void onGreenButtonPress() {
         if (state == Idle) {
             // start_button_jog(false);
-            std::string cmd = "G1f1000y0";        
+            std::string cmd = "G90G21F500Y0";        
+            send_line(cmd.c_str());
+            std::string cmd = "G91";        
             send_line(cmd.c_str());
         }
     }
@@ -358,7 +360,9 @@ public:
     void onRedButtonPress() {
         if (state == Idle) {
             // start_button_jog(true);
-            std::string cmd = "G1f1000x0";        
+            std::string cmd = "G90G21F500X0";        
+            send_line(cmd.c_str());
+            std::string cmd = "G91";        
             send_line(cmd.c_str());
         }
     }
