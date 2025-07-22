@@ -304,7 +304,7 @@ public:
         for (int axis = 0; axis < num_axes; ++axis) {
             if (selected(axis)) {
                 cmd += axisNumToChar(axis);
-                cmd += e4_to_cstr(delta * distance(axis), inInches ? 3 : 2);
+                cmd += e4_to_cstr(delta * distance(axis), inInches ? 3 : 3);
             }
         }
         send_line(cmd.c_str());
@@ -350,8 +350,8 @@ public:
             // start_button_jog(false);
             std::string cmd = "G90G21F500Y0";        
             send_line(cmd.c_str());
-            std::string cmd = "G91";        
-            send_line(cmd.c_str());
+            // cmd = "G91";        
+            // send_line(cmd.c_str());
         }
     }
     void onGreenButtonRelease() {
@@ -362,8 +362,8 @@ public:
             // start_button_jog(true);
             std::string cmd = "G90G21F500X0";        
             send_line(cmd.c_str());
-            std::string cmd = "G91";        
-            send_line(cmd.c_str());
+            // cmd = "G91";        
+            // send_line(cmd.c_str());
         }
     }
     void onRedButtonRelease() {

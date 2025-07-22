@@ -36,7 +36,7 @@ bool     inInches  = false;
 uint32_t errorExpire;
 
 int num_digits() {
-    return inInches ? 3 : 2;
+    return inInches ? 3 : 3;
 }
 
 // clang-format off

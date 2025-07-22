@@ -16,6 +16,8 @@ private:
     int  _rate    = 80;
     int  _retract = 20;
     int  _axis    = 2;  // Z is default
+    int  _offset_mult =1;
+    char * _mult_label="  0.01";
 
 public:
     ProbingScene() : Scene("Probe",4) {}
@@ -49,7 +51,10 @@ public:
         } else if (state == Idle) {
             // int retract = _travel < 0 ? _retract : -_retract;
             // send_linef("$J=G91F1000%c%d", axisNumToChar(_axis), retract);
-            send_linef("G38.2G91F%d%c%dP%s", _rate, axisNumToChar(_axis), -_travel, e4_to_cstr(-_offset, 2));
+            if (_offset_mult==1) {_offset_mult=10; _mult_label="  0.10";}
+            else if (_offset_mult==10) {_offset_mult=100; _mult_label="  1.00";}
+            else {_offset_mult=1; _mult_label="  0.01";}
+            reDisplay();
             return;
         } else if (state == Hold || state == DoorClosed) {
             fnc_realtime(Reset);
@@ -69,7 +74,7 @@ public:
         if (abs(delta) > 0) {
             switch (selection) {
                 case 0:
-                    _offset += delta * 100;  // Increment by 0.0100
+                    _offset += delta * 100 * _offset_mult;  // Increment by 0.0100
                     setPref("Offset", _offset);
                     break;
                 case 1:
@@ -135,7 +140,7 @@ public:
             //led.draw(myProbeSwitch);
 
             grnLabel = "Probe";
-            redLabel = "R.Probe";
+            redLabel = _mult_label;
         } else {
             if (state == Jog || state == Alarm) {  // there is no Probing state, so Cycle is a valid state on this
                 //centered_text("Invalid State", 105, WHITE, MEDIUM);
